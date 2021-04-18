@@ -1,0 +1,15 @@
+import requests
+import json
+
+url = 'https://api.mist.com/api/v1/sites/:site-id/wlans'
+
+headers = {
+	'Content-Type': 'application/json',
+	'Authorization': 'Token Your-Token-Here'
+}
+
+results = requests.get(url, headers=headers)
+wlans = results.json()
+
+for wlan in wlans:
+	print(wlan['ssid'], '>',wlan['id'])
