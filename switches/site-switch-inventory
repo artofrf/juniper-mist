@@ -1,0 +1,13 @@
+import requests
+url = 'https://api.mist.com/api/v1/sites/:site-id/devices?type=switch'
+
+headers = {
+	'Content-Type': 'application/json',
+	'Authorization': 'Token Your-Token-Goes-Here'
+}
+
+results = requests.get(url, headers=headers)
+inventory = results.json()
+
+for inventory in inventory:
+	print(inventory['port_config'], ':', inventory['name'], ':',inventory['mac'], ':',inventory['serial'], ':',inventory['id'])
