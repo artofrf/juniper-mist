@@ -1,0 +1,41 @@
+import json
+import csv
+import requests
+from IPython.core.display import display
+
+#This will ask the user to Enter Device ID.
+device_id = input('Enter Device ID:')
+validation = 'You Entered:'
+display(validation + device_id)
+
+#~~Site ID + Base URL~~
+base_url = 'https://api.mist.com/api/v1/sites/:site-id/devices/'
+#Add device ID to base URL
+url = base_url + device_id
+print(url)
+
+#This csv file will contain all the port numbers and their descriptions
+with open('sw_vars.csv', 'r') as csv_file:
+    reader = csv.reader(csv_file)
+#    next(reader)
+    devices = list(reader)
+#    print(devices)
+for port,description in devices:
+#    print(port,description)
+
+    payload= {
+        "port_config": {},
+    }
+for idx, (port,description) in enumerate(devices):
+    if idx == 0:
+        continue # This line skips the header
+    payload["port_config"][port] = {"description": description}
+#print(json.dumps(payload))
+data = (json.dumps(payload))
+print(data)
+headers = {
+	'Content-Type': 'application/json',
+	'Authorization': 'Token Your-Token-Goes-Here'
+}
+response = requests.request("PUT", url, headers=headers, data=data)
+print('\n''Script Finished')
