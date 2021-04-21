@@ -1,0 +1,18 @@
+import requests
+import json
+
+url = 'https://api.mist.com/api/v1/sites/:site-id/stats/clients'
+
+payload={}
+
+headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token Your-Token-Here'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+results = response.json()
+
+#Will print out client list
+for results in results:
+ print(results['hostname'],':',results['mac'],':',results['rx_rate'],':',results['tx_rate'])
