@@ -1,0 +1,5 @@
+,usage,dynamic_usage,description
+ge-0/0/0,ali-aps,,1
+ge-0/0/1,ali-uplink,,2
+ge-0/0/2,ap,,3
+ge-0/0/3,iot,,4
