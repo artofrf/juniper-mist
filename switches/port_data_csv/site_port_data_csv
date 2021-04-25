@@ -1,0 +1,25 @@
+#Will output a csv file of the port list and columns showing properties
+import requests
+import pprint as pp
+import pandas as pd
+
+url = 'https://api.mist.com/api/v1/sites/:site-id/devices/:device-id'
+
+headers = {
+	'Content-Type': 'application/json',
+	'Authorization': 'Token YOUR-TOKEN-GOES-HERE'
+}
+
+results = requests.get(url, headers=headers)
+sw_config = results.json()
+data = sw_config['port_config']
+#pp.pprint(data)
+
+pd.DataFrame(data).transpose().to_csv('switchport_data.csv',index=True)
+
+
+
+
+
+
+
